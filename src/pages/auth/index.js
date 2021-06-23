@@ -1,9 +1,11 @@
+import Link from 'next/link';
 import {useTranslation} from 'next-i18next';
 import {FloatingLabel, Form, Button, Card, Spinner} from 'react-bootstrap';
 import {serverSideTranslations} from 'next-i18next/serverSideTranslations';
 import {ChangeLocale} from "../../components/ChnageLocale";
 import LogoSvg from "../../components/LogoSvg";
 import {useState} from "react";
+import {HOME_PAGE} from "../../constants/urls";
 
 
 const AuthPage = () => {
@@ -23,9 +25,13 @@ const AuthPage = () => {
         <main className='d-flex flex-column justify-content-center align-items-center vh-100 wh-100'>
 
 
-            <Card style={{maxWidth: '420px'}} className='w-100 shadow text-center'>
+            <Card style={{maxWidth: '420px'}} className='w-100 shadow'>
                 <Card.Body className='p-5'>
-                    <img src='/logo/bashchkov-technology-360x140.png' className='mb-5' style={{width: 220}}/>
+                    <Link href={HOME_PAGE}>
+                        <a className='d-block mb-5 text-center'>
+                            <img src='/logo/bashchkov-technology-360x140.png' style={{width: 220}}/>
+                        </a>
+                    </Link>
                     {/*<LogoSvg width={80} className='mb-4'/>*/}
                     <Form onSubmit={handleSubmit}>
                         {/*<img className='mb-4' src='../assets/brand/bootstrap-logo.svg' alt='' width='72' height='57'/>*/}
@@ -35,7 +41,7 @@ const AuthPage = () => {
                         <FloatingLabel label={t('password')} className='mb-4'>
                             <Form.Control type='password' placeholder={t('password')} disabled={loading}/>
                         </FloatingLabel>
-                        <Button variant='primary' size='lg' className='w-100 mb-4' type='submit' disabled={loading}>
+                        <Button variant='primary' size='lg' className='w-100 mb-4 text-uppercase' type='submit' disabled={loading}>
                             {loading ? (
                                 <Spinner as="span" animation="border" role="status" aria-hidden="true"/>
                             ) : t('sign_in')}
