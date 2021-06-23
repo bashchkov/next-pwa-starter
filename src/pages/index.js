@@ -2,6 +2,7 @@ import Link from 'next/link';
 import {useRouter} from 'next/router';
 
 import {useTranslation} from 'next-i18next';
+import {ChangeLocale} from "../components/ChnageLocale";
 
 
 const Homepage = () => {
@@ -28,6 +29,10 @@ const Homepage = () => {
                             {t('to-second-page')}
                         </button>
                     </Link>
+                    <br/>
+                    <ChangeLocale/>
+                    <br/>
+                    <Link href='/auth'>Sign In</Link>
                 </div>
             </main>
         </>

@@ -1,27 +1,50 @@
 import {useTranslation} from 'next-i18next';
-import {FloatingLabel, Form, Button} from 'react-bootstrap';
+import {FloatingLabel, Form, Button, Card, Spinner} from 'react-bootstrap';
 import {serverSideTranslations} from 'next-i18next/serverSideTranslations';
+import {ChangeLocale} from "../../components/ChnageLocale";
+import LogoSvg from "../../components/LogoSvg";
+import {useState} from "react";
 
 
 const AuthPage = () => {
 
+    const [loading, setLoading] = useState(false);
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const data = new FormData(event.currentTarget);
+        console.log(data)
+        setLoading(true)
+    }
+
     const {t} = useTranslation('auth')
 
     return (
-        <main className='d-flex justify-content-center align-items-center vh-100 wh-100'>
-            <Form className='w-100 p-3 text-center' style={{maxWidth: '330px'}}>
-                {/*<img className='mb-4' src='../assets/brand/bootstrap-logo.svg' alt='' width='72' height='57'/>*/}
-                <h1 className='h3 mb-4 fw-normal'>{t('sign_in')}</h1>
-                <FloatingLabel label={t('email')} className='mb-3'>
-                    <Form.Control type='email' placeholder={t('email')} />
-                </FloatingLabel>
-                <FloatingLabel label={t('password')} className='mb-4'>
-                    <Form.Control type='password' placeholder={t('password')}/>
-                </FloatingLabel>
-                <Button variant='primary' size='lg' className='w-100' type='submit'>{t('sign_in')}</Button>
+        <main className='d-flex flex-column justify-content-center align-items-center vh-100 wh-100'>
 
-                <p className='mt-5 mb-3 text-muted'>&copy; 2017–2021</p>
-            </Form>
+
+            <Card style={{maxWidth: '420px'}} className='w-100 shadow text-center'>
+                <Card.Body className='p-5'>
+                    <img src='/logo/bashchkov-technology-360x140.png' className='mb-5' style={{width: 220}}/>
+                    {/*<LogoSvg width={80} className='mb-4'/>*/}
+                    <Form onSubmit={handleSubmit}>
+                        {/*<img className='mb-4' src='../assets/brand/bootstrap-logo.svg' alt='' width='72' height='57'/>*/}
+                        <FloatingLabel label={t('email')} className='mb-4'>
+                            <Form.Control type='email' placeholder={t('email')} disabled={loading}/>
+                        </FloatingLabel>
+                        <FloatingLabel label={t('password')} className='mb-4'>
+                            <Form.Control type='password' placeholder={t('password')} disabled={loading}/>
+                        </FloatingLabel>
+                        <Button variant='primary' size='lg' className='w-100 mb-4' type='submit' disabled={loading}>
+                            {loading ? (
+                                <Spinner as="span" animation="border" role="status" aria-hidden="true"/>
+                            ) : t('sign_in')}
+                        </Button>
+                        <p className='mt-5 mb-3 text-muted'>&copy; 2017–2021</p>
+                        <ChangeLocale/>
+                    </Form>
+                </Card.Body>
+            </Card>
         </main>
     )
 }
