@@ -1,26 +1,18 @@
 import Link from 'next/link';
-import {useRouter} from 'next/router';
 import {useTranslation} from 'next-i18next';
 import {ChangeLocale} from '@components/ChnageLocale';
+import {Counter} from "../features/counter/Counter";
 
 
 const Homepage = () => {
 
-    const router = useRouter()
     const {t} = useTranslation('common')
 
     return (
         <>
             <main>
                 <div>
-                    <Link
-                        href='/'
-                        locale={router.locale === 'en' ? 'ru' : 'en'}
-                    >
-                        <button>
-                            {t('change-locale')}
-                        </button>
-                    </Link>
+                    <Counter/>
                     <Link href='/second-page'>
                         <button
                             type='button'

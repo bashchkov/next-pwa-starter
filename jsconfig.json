@@ -2,12 +2,12 @@
   "compilerOptions": {
     "baseUrl": "src",
     "paths": {
-      "@components/*": [
-        "components/*"
-      ],
-      "@framework/*": [
-        "framework/seaisys/*"
-      ]
+      "@components/*": ["components/*"],
+      "@features/*": ["features/*"],
+      "@framework/*": ["framework/seaisys/*"],
+      "@libs/*": ["libs/*"],
+      "@styles/*": ["styles/*"],
+      "@utils/*": ["utils/*"]
     }
   }
 }

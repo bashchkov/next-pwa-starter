@@ -1,32 +1,12 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import {useTranslation} from 'next-i18next';
-import {FloatingLabel, Form, Button, Card, Spinner} from 'react-bootstrap';
 import {serverSideTranslations} from 'next-i18next/serverSideTranslations';
-import {ChangeLocale} from '../../components/ChnageLocale';
-import LogoSvg from '../../components/LogoSvg';
-import {useState} from 'react';
-import {HOME_PAGE} from '../../constants/urls';
+import SignInForm from "@features/auth/SignInForm";
+import {HOME_PAGE} from "../../constants/urls";
 
 
 const AuthPage = () => {
-
-    const [loading, setLoading] = useState(false);
-
-    const [validated, setValidated] = useState(false);
-
-    const handleSubmit = (event) => {
-        const form = event.currentTarget;
-        if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
-            const data = new FormData(event.currentTarget);
-            console.log(data)
-            setLoading(true)
-        }
-
-        setValidated(true);
-    }
 
     const {t} = useTranslation('auth')
 
@@ -41,14 +21,9 @@ const AuthPage = () => {
                             attempting to submit the form without completing it.</p>
                     </div>
                     <div className='col-md-10 mx-auto col-lg-5'>
-                        <Form
-                            noValidate
-                            validated={validated}
-                            onSubmit={handleSubmit}
-                            className='p-4 p-md-5 rounded-3 bg-light shadow'
-                        >
-                            <Link href={HOME_PAGE}>
-                                <a className='d-block mb-4 text-center'>
+                        <div className='p-4 p-md-5 rounded-3 bg-light shadow text-center'>
+                            <Link href='/'>
+                                <a className='d-block mb-4 '>
                                     <Image
                                         src='/logo/bashchkov-technology-360x140.png'
                                         layout='fixed'
@@ -57,32 +32,16 @@ const AuthPage = () => {
                                     />
                                 </a>
                             </Link>
-                            <FloatingLabel label={t('email')} className='mb-3'>
-                                <Form.Control
-                                    type='email'
-                                    placeholder={t('email')}
-                                    disabled={loading}
-                                    required
-                                />
-                            </FloatingLabel>
-                            <FloatingLabel label={t('password')} className='mb-4'>
-                                <Form.Control
-                                    type='password'
-                                    placeholder={t('password')}
-                                    disabled={loading}
-                                    required
-                                />
-                            </FloatingLabel>
-                            <Button variant='primary' size='lg' className='w-100' type='submit' disabled={loading}>
-                                {loading ? (
-                                    <Spinner as='span' animation='border' role='status' aria-hidden='true'/>
-                                ) : t('sign_in')}
-                            </Button>
+                            <SignInForm
+                                emailLabel={t('email')}
+                                buttonLabel={t('sign_in')}
+                                passwordLabel={t('password')}
+                            />
                             <hr className='my-4'/>
-                            <small className='d-block text-muted text-center'>
-                                &copy; 2021 <Link href={HOME_PAGE}><a>Bashchkov Technology LLC</a></Link>
+                            <small className='d-block text-muted'>
+                                &copy; 2021 <Link href='/'><a>Bashchkov Technology LLC</a></Link>
                             </small>
-                        </Form>
+                        </div>
                     </div>
                 </div>
             </div>

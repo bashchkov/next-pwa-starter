@@ -5,9 +5,9 @@ import Head from 'next/head';
 import { Provider } from 'react-redux';
 import { store } from '../redux/store';
 
-import * as gtag from '../lib/gtag';
+import * as gtag from '@libs/gtag';
 
-import '../styles/globals.scss';
+import '@styles/globals.scss';
 
 
 const App = ({Component, pageProps}) => {
